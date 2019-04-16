@@ -1,29 +1,36 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { DateRangePicker } from 'react-dates';
-import { setTextFilter, sortByDate, sortByOddel, setStartDate, setEndDate } from '../actions/filters';
+import React from 'react'
+import { connect } from 'react-redux'
+import { DateRangePicker } from 'react-dates'
+import {
+  setTextFilter,
+  sortByDate,
+  sortByOddel,
+  setStartDate,
+  setEndDate
+} from '../actions/filters'
 
-export class UserListFilters extends React.Component { //UserListFilters
+export class UserListFilters extends React.Component {
+  //UserListFilters
   state = {
     calendarFocused: null
-  };
-  onDatesChange = ({ startDate, endDate }) => {
-    this.props.setStartDate(startDate);
-    this.props.setEndDate(endDate);
-  };
-  onFocusChange = (calendarFocused) => {
-    this.setState(() => ({ calendarFocused }));
   }
-  onTextChange = (e) => {
-    this.props.setTextFilter(e.target.value);
-  };
-  onSortChange = (e) => {
+  onDatesChange = ({ startDate, endDate }) => {
+    this.props.setStartDate(startDate)
+    this.props.setEndDate(endDate)
+  }
+  onFocusChange = calendarFocused => {
+    this.setState(() => ({ calendarFocused }))
+  }
+  onTextChange = e => {
+    this.props.setTextFilter(e.target.value)
+  }
+  onSortChange = e => {
     if (e.target.value === 'date') {
-      this.props.sortByDate();
+      this.props.sortByDate()
     } else if (e.target.value === 'oddel') {
-      this.props.sortByOddel();
+      this.props.sortByOddel()
     }
-  };
+  }
   render() {
     return (
       <div className="content-container">
@@ -39,7 +46,6 @@ export class UserListFilters extends React.Component { //UserListFilters
           </div>
           <div className="input-group__item">
             <select
-            
               className="select"
               value={this.props.filters.sortBy}
               onChange={this.onSortChange}
@@ -62,21 +68,23 @@ export class UserListFilters extends React.Component { //UserListFilters
           </div>
         </div>
       </div>
-    );
+    )
   }
-};
+}
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   filters: state.filters
-});
+})
 
-const mapDispatchToProps = (dispatch) => ({
-  setTextFilter: (text) => dispatch(setTextFilter(text)),
+const mapDispatchToProps = dispatch => ({
+  setTextFilter: text => dispatch(setTextFilter(text)),
   sortByDate: () => dispatch(sortByDate()),
   sortByOddel: () => dispatch(sortByOddel()),
-  setStartDate: (startDate) => dispatch(setStartDate(startDate)),
-  setEndDate: (endDate) => dispatch(setEndDate(endDate))
-});
+  setStartDate: startDate => dispatch(setStartDate(startDate)),
+  setEndDate: endDate => dispatch(setEndDate(endDate))
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserListFilters);//UserListFilters
- 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserListFilters) //UserListFilters
