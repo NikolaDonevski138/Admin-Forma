@@ -16,7 +16,7 @@ const Header = () => (
         <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           
-            <a className="nav-link" href=""><NavLink to="/" activeClassName="is-active">View User</NavLink>
+            <a className="nav-link" href=""><NavLink to="/UserDashboardPage" activeClassName="is-active">View User</NavLink>
 </a>
             </li>
             <li className="nav-item">
@@ -24,6 +24,11 @@ const Header = () => (
             <a className="nav-link" href=""><NavLink to="/create" activeClassName="is-active">Create user</NavLink>
 </a>
             </li>
+            <li className="nav-item">
+         
+         <a className="nav-link" href=""><NavLink to="/" activeClassName="is-active">Log out</NavLink>
+</a>
+         </li>
     </ul>
     </div>
     </nav>

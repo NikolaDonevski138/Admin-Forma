@@ -3,24 +3,35 @@ import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-export default class ExpenseForm extends React.Component {
+export default class UserForm extends React.Component { //UserForm 
   constructor(props) {
     super(props);
 
     this.state = {
-      description: props.expense ? props.expense.description : '',
-      note: props.expense ? props.expense.note : '',
-      amount: props.expense ? (props.expense.amount / 100).toString() : '',
-      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      ime: props.user ? props.user.ime : '', //description: props.user ? props.user.description
+      prezime: props.user ? props.user.prezime : '',
+      oddel: props.user ? props.user.oddel : '',
+      note: props.user ? props.user.note : '', //props.user ? props.user.note
+      amount: props.user ? (props.user.amount / 100).toString() : '', //props.user ? (props.user.amount/100).toString() : '';
+      createdAt: props.user ? moment(props.user.createdAt) : moment(), //props.user ? moment(props.user.createdAt) : moment().
       calendarFocused: false,
       error: '',
-      email: props.expense ? props.expense.email : ''
+      email: props.user ? props.user.email : ''//props.user ? props.user.email
     };
   }
-  onDescriptionChange = (e) => {
-    const description = e.target.value;
-    this.setState(() => ({ description }));
+  onImeChange = (e) => {
+    const ime = e.target.value;
+    this.setState(() => ({ ime }));
   };
+  onPrezimeChange = (e) => {
+    const prezime = e.target.value;
+    this.setState(()=> ({prezime}))
+  }
+  onOddelChange = (e) => {
+    const oddel = e.target.value;
+    this.setState(()=>({oddel}))
+  }
+
 onEmailChange = (e) => {
   const email = e.target.value;
   this.setState(() => ({email}))
@@ -48,12 +59,14 @@ onEmailChange = (e) => {
   onSubmit = (e) => {
     e.preventDefault();
 
-    if (!this.state.description || !this.state.amount) {
+    if (!this.state.ime ||!this.state.prezime ||!this.state.oddel|| !this.state.amount) {
       this.setState(() => ({ error: 'Please provide User Information' }));
     } else {
       this.setState(() => ({ error: '' }));
       this.props.onSubmit({
-        description: this.state.description,
+        ime: this.state.ime,
+        prezime:this.state.prezime,
+        oddel:this.state.oddel,
         amount: parseFloat(this.state.amount, 10) * 100,
         createdAt: this.state.createdAt.valueOf(),
         note: this.state.note,
@@ -69,11 +82,27 @@ onEmailChange = (e) => {
 
           <input
             type="text"
-            placeholder="Enter Name and Surname for User"
+            placeholder="Enter Name for User"
             autoFocus
             className="text-input"
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
+            value={this.state.ime}
+            onChange={this.onImeChange}
+          />
+             <input
+            type="text"
+            placeholder="Enter Surname for User"
+            autoFocus
+            className="text-input"
+            value={this.state.prezime}
+            onChange={this.onPrezimeChange}
+          />
+          <input
+            type="text"
+            placeholder="Enter department for User"
+            autoFocus
+            className="text-input"
+            value={this.state.oddel}
+            onChange={this.onOddelChange}
           />
            <input
             type="email"

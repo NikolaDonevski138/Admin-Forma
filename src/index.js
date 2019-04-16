@@ -6,11 +6,15 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css'
 import configureStore from './store/configureStore'
-import {addExpense} from './actions/expenses'
+import {addUser} from './actions/users' //{addUser} from './action/users
 import {setTextFilter} from './actions/filters'
-import getVisibleExpenses from './selectors/expenses'
+import getVisibleUsers from './selectors/users' //getVisibleUsers from './selectors/users
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js';
+import 'tachyons';
+
+
+
 
 const store = configureStore();
 
@@ -21,6 +25,7 @@ const jsx = (
     <Provider store={store}>
     <AppRouter />
     </Provider>
+    
 )
 
 ReactDOM.render(jsx, document.getElementById('app'));

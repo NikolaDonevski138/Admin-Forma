@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DateRangePicker } from 'react-dates';
-import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
+import { setTextFilter, sortByDate, sortByOddel, setStartDate, setEndDate } from '../actions/filters';
 
-export class ExpenseListFilters extends React.Component {
+export class UserListFilters extends React.Component { //UserListFilters
   state = {
     calendarFocused: null
   };
@@ -20,8 +20,8 @@ export class ExpenseListFilters extends React.Component {
   onSortChange = (e) => {
     if (e.target.value === 'date') {
       this.props.sortByDate();
-    } else if (e.target.value === 'amount') {
-      this.props.sortByAmount();
+    } else if (e.target.value === 'oddel') {
+      this.props.sortByOddel();
     }
   };
   render() {
@@ -45,7 +45,7 @@ export class ExpenseListFilters extends React.Component {
               onChange={this.onSortChange}
             >
               <option value="date">Date</option>
-              <option value="amount">Amount</option>
+              <option value="amount">Oddel</option>
             </select>
           </div>
           <div className="input-group__item">
@@ -73,9 +73,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setTextFilter: (text) => dispatch(setTextFilter(text)),
   sortByDate: () => dispatch(sortByDate()),
-  sortByAmount: () => dispatch(sortByAmount()),
+  sortByOddel: () => dispatch(sortByOddel()),
   setStartDate: (startDate) => dispatch(setStartDate(startDate)),
   setEndDate: (endDate) => dispatch(setEndDate(endDate))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(UserListFilters);//UserListFilters
+ 
