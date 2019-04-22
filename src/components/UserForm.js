@@ -35,7 +35,10 @@ export default class UserForm extends React.Component {
 
   onEmailChange = e => {
     const email = e.target.value
+    console.log(email)
+   
     this.setState(() => ({ email }))
+
   }
 
   onNoteChange = e => {

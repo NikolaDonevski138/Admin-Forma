@@ -1,16 +1,33 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-
+import Particles from 'react-particles-js';
 function Signin({ auth, setAuth }) {
   const onSubmit = e => {
     e.preventDefault()
     setAuth({ isAuth: true })
   }
-
-  if (auth.isAuth) return <Redirect to="/UserDashboardPage" exact={true} />
+  const particlesOptions = {
+    particles: {
+      number: {
+        value: 30,
+        density: {
+          enable: true,
+          value_area: 800
+        }
+      }
+    }
+  }
+  if (auth.isAuth) {
+    console.log('SOMETHING');
+    return <Redirect to="/UserDashboardPage" exact={true} />
+  }
 
   return (
-    <div>
+    <div className="background">
+      <Particles
+        className='particles'
+        params={particlesOptions}
+      />
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center">
         <main className="pa4 black-80">
           <form onSubmit={onSubmit} className="measure">

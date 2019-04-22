@@ -14,7 +14,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <div>
-        <Header />
+        <Header auth={auth} setAuth={setAuth} />
         <Switch>
           <Route
             path="/"
@@ -28,10 +28,10 @@ function AppRouter() {
             component={UserDashboardPage}
             exact={true}
           />
-          <Route path="/create" component={AddUserPage} />
-          <Route path="/edit/:id" component={EditUserPage} />
-          <Route path="/help" component={HelpPage} />
-          <Route component={NotFoundPage} />
+          <Route path="/create" component={AddUserPage} exact={true} />
+          <Route path="/edit/:id" component={EditUserPage} exact={true} />
+          <Route path="/help" component={HelpPage} exact={true} />
+          <Route path="/" component={NotFoundPage} />
         </Switch>
       </div>
     </BrowserRouter>

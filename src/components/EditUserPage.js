@@ -15,7 +15,7 @@ const EditUserPage = props => (
         user={props.user}
         onSubmit={user => {
           props.dispatch(editUser(props.user.id, user)) //editUser(props.user.id,user)
-          props.history.push('/')
+          props.history.push('/UserDashboardPage')
         }}
       />
       <button
