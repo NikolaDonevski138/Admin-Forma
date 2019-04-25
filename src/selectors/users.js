@@ -12,8 +12,8 @@ export default (users, { text, sortBy, startDate, endDate }) =>
         ? endDate.isSameOrAfter(createdAtMoment, 'day')
         : true
       const textMatch = user.ime.toLowerCase().includes(text.toLowerCase())
-
-      return startDateMatch && endDateMatch && textMatch
+     
+      return startDateMatch && endDateMatch && textMatch 
     })
     .sort((a, b) => {
       if (sortBy === 'date') {

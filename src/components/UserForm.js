@@ -29,14 +29,22 @@ export default class UserForm extends React.Component {
     this.setState(() => ({ prezime }))
   }
   onOddelChange = e => {
-    const oddel = e.target.value
-    this.setState(() => ({ oddel }))
+    const oddel = e.target.value;
+    if (e.target.value === 'Team Member'){
+      this.setState(() => ({oddel}))
+    } else if
+      (e.target.value === "Team Leader"){
+        this.setState(()=>({oddel}))
+      }else if (e.target.value === "Team Manager"){
+        this.setState(()=>({oddel}))
+      }
+    
   }
 
   onEmailChange = e => {
     const email = e.target.value
     console.log(email)
-   
+    if(!email || email.match())
     this.setState(() => ({ email }))
 
   }
@@ -66,8 +74,8 @@ export default class UserForm extends React.Component {
     if (
       !this.state.ime ||
       !this.state.prezime ||
-      !this.state.oddel ||
-      !this.state.amount
+      !this.state.oddel //||
+      //!this.state.amount
     ) {
       this.setState(() => ({ error: 'Please provide User Information' }))
     } else {
@@ -104,14 +112,16 @@ export default class UserForm extends React.Component {
           value={this.state.prezime}
           onChange={this.onPrezimeChange}
         />
-        <input
-          type="text"
-          placeholder="Enter department for User"
-          autoFocus
-          className="text-input"
-          value={this.state.oddel}
-          onChange={this.onOddelChange}
-        />
+        <select
+              className="select"
+              onChange={this.onOddelChange}
+            >
+                <option value=""  disabled selected>Oddel</option>
+
+              <option value="Team Member">Team Member</option>
+              <option value="Team Leader">Team Leader</option>
+              <option value="Team Manager">Team Manager</option>
+            </select>
         <input
           type="email"
           placeholder="Email"
@@ -120,13 +130,13 @@ export default class UserForm extends React.Component {
           value={this.state.email}
           onChange={this.onEmailChange}
         />
-        <input
+        {/* <input
           type="text"
           placeholder="Amount"
           className="text-input"
           value={this.state.amount}
           onChange={this.onAmountChange}
-        />
+        /> */}
         <SingleDatePicker
           date={this.state.createdAt}
           onDateChange={this.onDateChange}
