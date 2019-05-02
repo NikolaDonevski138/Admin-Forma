@@ -1,7 +1,7 @@
-import React from 'react'
-import moment from 'moment'
-import { SingleDatePicker } from 'react-dates'
-import 'react-dates/lib/css/_datepicker.css'
+import React from "react"
+import moment from "moment"
+import { SingleDatePicker } from "react-dates"
+import "react-dates/lib/css/_datepicker.css"
 
 export default class UserForm extends React.Component {
   //UserForm
@@ -9,17 +9,23 @@ export default class UserForm extends React.Component {
     super(props)
 
     this.state = {
-      ime: props.user ? props.user.ime : '', //description: props.user ? props.user.description
-      prezime: props.user ? props.user.prezime : '',
-      oddel: props.user ? props.user.oddel : '',
-      note: props.user ? props.user.note : '', //props.user ? props.user.note
-      amount: props.user ? (props.user.amount / 100).toString() : '', //props.user ? (props.user.amount/100).toString() : '';
+      ime: props.user ? props.user.ime : "", //description: props.user ? props.user.description
+      prezime: props.user ? props.user.prezime : "",
+      oddel: props.user ? props.user.oddel : "",
+      note: props.user ? props.user.note : "", //props.user ? props.user.note
+      amount: props.user ? (props.user.amount / 100).toString() : "", //props.user ? (props.user.amount/100).toString() : '';
       createdAt: props.user ? moment(props.user.createdAt) : moment(), //props.user ? moment(props.user.createdAt) : moment().
       calendarFocused: false,
-      error: '',
-      email: props.user ? props.user.email : '' //props.user ? props.user.email
+      error: "",
+      email: props.user ? props.user.email : "",
+      proekt: props.user ? props.user.proekt : "" //props.user ? props.user.email
     }
   }
+  onProektChange = e => {
+    const proekt = e.target.value
+    this.setState(() => ({ proekt }))
+  }
+
   onImeChange = e => {
     const ime = e.target.value
     this.setState(() => ({ ime }))
@@ -29,24 +35,20 @@ export default class UserForm extends React.Component {
     this.setState(() => ({ prezime }))
   }
   onOddelChange = e => {
-    const oddel = e.target.value;
-    if (e.target.value === 'Team Member'){
-      this.setState(() => ({oddel}))
-    } else if
-      (e.target.value === "Team Leader"){
-        this.setState(()=>({oddel}))
-      }else if (e.target.value === "Team Manager"){
-        this.setState(()=>({oddel}))
-      }
-    
+    const oddel = e.target.value
+    if (e.target.value === "Team Member") {
+      this.setState(() => ({ oddel }))
+    } else if (e.target.value === "Team Leader") {
+      this.setState(() => ({ oddel }))
+    } else if (e.target.value === "Team Manager") {
+      this.setState(() => ({ oddel }))
+    }
   }
 
   onEmailChange = e => {
     const email = e.target.value
     console.log(email)
-    if(!email || email.match())
-    this.setState(() => ({ email }))
-
+    if (!email || email.match()) this.setState(() => ({ email }))
   }
 
   onNoteChange = e => {
@@ -74,12 +76,14 @@ export default class UserForm extends React.Component {
     if (
       !this.state.ime ||
       !this.state.prezime ||
-      !this.state.oddel //||
+      !this.state.oddel ||
+      !this.state.proekt
+      //||
       //!this.state.amount
     ) {
-      this.setState(() => ({ error: 'Please provide User Information' }))
+      this.setState(() => ({ error: "Please provide User Information" }))
     } else {
-      this.setState(() => ({ error: '' }))
+      this.setState(() => ({ error: "" }))
       this.props.onSubmit({
         ime: this.state.ime,
         prezime: this.state.prezime,
@@ -87,7 +91,8 @@ export default class UserForm extends React.Component {
         amount: parseFloat(this.state.amount, 10) * 100,
         createdAt: this.state.createdAt.valueOf(),
         note: this.state.note,
-        email: this.state.email
+        email: this.state.email,
+        proekt: this.state.proekt
       })
     }
   }
@@ -112,16 +117,23 @@ export default class UserForm extends React.Component {
           value={this.state.prezime}
           onChange={this.onPrezimeChange}
         />
-        <select
-              className="select"
-              onChange={this.onOddelChange}
-            >
-                <option value=""  disabled selected>Oddel</option>
+        <select className="select" onChange={this.onOddelChange}>
+          <option value="" disabled selected>
+            Oddel
+          </option>
 
-              <option value="Team Member">Team Member</option>
-              <option value="Team Leader">Team Leader</option>
-              <option value="Team Manager">Team Manager</option>
-            </select>
+          <option value="Team Member">Team Member</option>
+          <option value="Team Leader">Team Leader</option>
+          <option value="Team Manager">Team Manager</option>
+        </select>
+        <input
+          type="text"
+          placeholder="proekt"
+          autoFocus
+          className="text-input"
+          value={this.state.proekt}
+          onChange={this.onProektChange}
+        />
         <input
           type="email"
           placeholder="Email"

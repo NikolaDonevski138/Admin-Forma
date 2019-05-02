@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
-import numeral from 'numeral'
+import React from "react"
+import { Link } from "react-router-dom"
+import moment from "moment"
+import numeral from "numeral"
 
 const UserListItem = ({
   id,
@@ -11,14 +11,15 @@ const UserListItem = ({
   note,
   ime,
   prezime,
-  oddel
+  oddel,
+  proekt
 }) => (
   <div>
     <Link className="list-item" to={`/edit/${id}`}>
       <div>
-        <h3 className="list-item__title">{ime + ' ' + prezime}</h3>
+        <h3 className="list-item__title">{ime + " " + prezime}</h3>
         <span className="list-item__sub-title">
-          {moment(createdAt).format('MMMM Do,YYYY')}
+          {moment(createdAt).format("MMMM Do,YYYY")}
         </span>
       </div>
 
@@ -34,6 +35,11 @@ const UserListItem = ({
         <h3 className="list-item__title black">Note:</h3>
 
         <span className="list-item__sub-title">{note}</span>
+      </div>
+      <div>
+        <h3 className="list-item__title black">Proekt:</h3>
+
+        <span className="list-item__sub-title">{proekt}</span>
       </div>
     </Link>
   </div>

@@ -1,16 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import UserListItem from './UserListItem' //UserListItem from ./UserListItem
-import selectUsers from '../selectors/users' //selectUsers from '../selectors/users
+import React from "react"
+import { connect } from "react-redux"
+import UserListItem from "./UserListItem" //UserListItem from ./UserListItem
+import selectUsers from "../selectors/users" //selectUsers from '../selectors/users
 
 export const UserList = (
   props //UserList
 ) => (
   <div className="content-container">
     <div className="list-header">
-      <div className="show-for-mobile">Users</div>
-      <div className="show-for-desktop">User</div>
-      <div className="show-for-desktop">Amount</div>
+      <div className="show-for-desktop">Users info</div>
     </div>
     <div className="list-body">
       {props.users.length === 0 ? (
